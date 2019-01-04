@@ -1,0 +1,4 @@
+//Image request actions
+export const IMAGE_FETCH_REQUESTED = 'IMAGE_FETCH_REQUESTED';
+export const IMAGE_FETCH_SUCCESS = 'IMAGE_FETCH_SUCCESS';
+export const IMAGE_FETCH_FAILURE = 'IMAGE_FETCH_FAILURE';
