@@ -1,15 +1,18 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
-import { imageApi } from '../api';
+import { imagesRequest } from '../api';
 
-import { IMAGE_FETCH_REQUESTED, IMAGE_FETCH_SUCCESS, IMAGE_FETCH_FAILURE } from '../actions/constants';
+import { IMAGE_FETCH_REQUESTED } from '../actions/constants';
+import { fetchImagesSuccess, fetchImagesError} from '../actions'
 
-function* imageSaga() {
+
+function* imageSaga(action) {
   try {
-    const response = yield call(imageApi.fetchImages);
-    const { data } = response;
-    yield put({IMAGE_FETCH_SUCCESS, data});
-  } catch (e) {
-    yield put({IMAGE_FETCH_FAILURE, message: e.message});
+    const {page, limit} = action;
+    const response = yield call(imagesRequest, page, limit);
+    yield put(fetchImagesSuccess(response));
+  } catch (err) {
+    console.log(err)
+    yield put(fetchImagesError(err));
   }
 }
 
